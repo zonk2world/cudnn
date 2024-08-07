@@ -1,0 +1,1000 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+   
+<!-- Mirrored from docs.nvidia.com/deeplearning/cudnn/archives/cudnn-897/install-guide/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Aug 2024 07:08:58 GMT -->
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+      <meta name="copyright" content="(C) Copyright 2005"></meta>
+      <meta name="DC.rights.owner" content="(C) Copyright 2005"></meta>
+      <meta name="DC.Type" content="concept"></meta>
+      <meta name="DC.Title" content="Abstract"></meta>
+      <meta name="abstract" content="This cuDNN 8.9.7 Installation Guide provides step-by-step instructions on how to install and check for correct operation of NVIDIA cuDNN on Linux and Microsoft Windows systems."></meta>
+      <meta name="description" content="This cuDNN 8.9.7 Installation Guide provides step-by-step instructions on how to install and check for correct operation of NVIDIA cuDNN on Linux and Microsoft Windows systems."></meta>
+      <meta name="DC.Coverage" content="Getting Started"></meta>
+      <meta name="DC.subject" content="cuDNN for Linux, Installation Guide"></meta>
+      <meta name="keywords" content="cuDNN for Linux, Installation Guide"></meta>
+      <meta name="DC.Format" content="XHTML"></meta>
+      <meta name="DC.Identifier" content="abstract"></meta>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/commonltr.css"></link>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/site.css"></link>
+      <title>Installation Guide :: NVIDIA cuDNN Documentation</title>
+      <!--[if lt IE 9]>
+      <script src="../common/formatting/html5shiv-printshiv.min.js"></script>
+      <![endif]-->
+      <script src="../../../../../../assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
+      <script type="text/javascript" src="../../../../../../cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.ba-hashchange.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="../common/formatting/jquery.scrollintoview.min.js"></script>
+      <script type="text/javascript" src="../search/htmlFileList.js"></script>
+      <script type="text/javascript" src="../search/htmlFileInfoList.js"></script>
+      <script type="text/javascript" src="../search/nwSearchFnt.min.js"></script>
+      <script type="text/javascript" src="../search/stemmers/en_stemmer.min.js"></script>
+      <script type="text/javascript" src="../search/index-1.js"></script>
+      <script type="text/javascript" src="../search/index-2.js"></script>
+      <script type="text/javascript" src="../search/index-3.js"></script>
+      <link rel="canonical" href="https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html"></link>
+      <link rel="stylesheet" type="text/css" href="../common/formatting/qwcode.highlight.css"></link>
+   </head>
+   <body>
+      
+      <header id="header"><span id="company">NVIDIA</span><span id="site-title">NVIDIA cuDNN Documentation</span><form id="search" method="get" action="https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-897/install-guide/search">
+            <input type="text" name="search-text"></input><fieldset id="search-location">
+               <legend>Search In:</legend>
+               <label><input type="radio" name="search-type" value="site"></input>Entire Site</label>
+               <label><input type="radio" name="search-type" value="document"></input>Just This Document</label></fieldset>
+            <button type="reset">clear search</button>
+            <button id="submit" type="submit">search</button></form>
+      </header>
+      <div id="site-content">
+         <nav id="site-nav">
+            <div class="category closed"><a href="../index.html" title="The root of the site.">Getting Started</a></div>
+            <div class="category"><a href="index.html" title="Installation Guide">Installation Guide</a></div>
+            <ul>
+               <li>
+                  <div class="section-link"><a href="#install-linux">1.&nbsp;Installing cuDNN on Linux</a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="#prerequisites">1.1.&nbsp;Prerequisites</a></div>
+                        <ul>
+                           <li>
+                              <div class="section-link"><a href="#installdriver">1.1.1.&nbsp;Installing NVIDIA Graphics Drivers</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#installcuda">1.1.2.&nbsp;Installing the CUDA Toolkit for Linux</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#install-zlib-linux">1.1.3.&nbsp;Installing Zlib</a></div>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#download">1.2.&nbsp;Downloading cuDNN for Linux</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#installlinux">1.3.&nbsp;Installing on Linux</a></div>
+                        <ul>
+                           <li>
+                              <div class="section-link"><a href="#installlinux-tar">1.3.1.&nbsp;Tar File Installation</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#installlinux-deb">1.3.2.&nbsp;Debian Local Installation</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#installlinux-rpm">1.3.3.&nbsp;RPM Local Installation</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#cudnn-package-manager-installation-overview">1.3.4.&nbsp;Package Manager Installation</a></div>
+                              <ul>
+                                 <li>
+                                    <div class="section-link"><a href="#package-manager-ubuntu-install">1.3.4.1.&nbsp;Ubuntu/Debian Network Installation</a></div>
+                                 </li>
+                                 <li>
+                                    <div class="section-link"><a href="#package-manager-rhel-install">1.3.4.2.&nbsp;RHEL Network Installation</a></div>
+                                 </li>
+                              </ul>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#verify">1.4.&nbsp;Verifying the Install on Linux</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#upgrade">1.5.&nbsp;Upgrading from cuDNN 7.x.x to cuDNN 8.x.x</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#troubleshoot">1.6.&nbsp;Troubleshooting</a></div>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#install-windows">2.&nbsp;Installing cuDNN on Windows</a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="#prerequisites-windows">2.1.&nbsp;Prerequisites</a></div>
+                        <ul>
+                           <li>
+                              <div class="section-link"><a href="#installdriver-windows">2.1.1.&nbsp;Installing NVIDIA Graphic Drivers</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#installcuda-windows">2.1.2.&nbsp;Installing the CUDA Toolkit for Windows</a></div>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#download-windows">2.2.&nbsp;Downloading cuDNN for Windows</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#installwindows">2.3.&nbsp;Installing on Windows</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#upgrade-windows">2.4.&nbsp;Upgrading cuDNN</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#troubleshoot-windows">2.5.&nbsp;Troubleshooting</a></div>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#add-lib-dep-pro">3.&nbsp;Building a cuDNN Dependent Program</a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="#depend">3.1.&nbsp;Including cuDNN’s Dependencies</a></div>
+                     </li>
+                     <li>
+                        <div class="section-link"><a href="#inter-lib-depend">3.2.&nbsp;cuDNN’s Inter-Library Dependencies</a></div>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#cross-compiling-cudnn-overview">4.&nbsp;Cross-Compiling cuDNN Samples</a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="#overview-linux-aarch-sbsa-cross-compile">4.1.&nbsp;Linux AArch64 SBSA</a></div>
+                        <ul>
+                           <li>
+                              <div class="section-link"><a href="#cross-compiling-install-cuda-sbsa">4.1.1.&nbsp;Installing the CUDA Toolkit for Linux AArch64 SBSA</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#cross-compiling-install-cudnn-sbsa">4.1.2.&nbsp;Installing cuDNN for Linux AArch64 SBSA</a></div>
+                           </li>
+                           <li>
+                              <div class="section-link"><a href="#cross-compile-cudnn-samples-sbsa">4.1.3.&nbsp;Cross-Compiling cuDNN Samples for Linux AArch64 SBSA</a></div>
+                           </li>
+                        </ul>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <div class="section-link"><a href="#acknowledgements">5.&nbsp;Appendix</a></div>
+                  <ul>
+                     <li>
+                        <div class="section-link"><a href="#unique_1729744975">5.1.&nbsp;ACKNOWLEDGEMENTS</a></div>
+                     </li>
+                  </ul>
+               </li>
+            </ul>
+         </nav>
+         <div id="resize-nav"></div>
+         <nav id="search-results">
+            <h2>Search Results</h2>
+            <ol></ol>
+         </nav>
+         
+         <div id="contents-container">
+            <div id="breadcrumbs-container">
+               <div id="release-info">Installation Guide (<a href="../pdf/cuDNN-Installation-Guide.pdf">PDF</a>)
+                  -
+                  
+                  
+                  
+                  -
+                  
+                  Last updated April 20, 2024
+               </div>
+            </div>
+            <article id="contents">
+               <div class="topic nested0" id="abstract"><a name="abstract" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#abstract" name="abstract" shape="rect">Abstract</a></h2>
+                  <div class="body conbody">
+                     <p class="shortdesc">This cuDNN 8.9.7 Installation Guide provides step-by-step instructions on how to
+                        install and check for correct operation of NVIDIA cuDNN on Linux and Microsoft Windows
+                        systems.
+                     </p>
+                  </div>
+               </div>
+               <div class="topic task nested0" id="install-linux"><a name="install-linux" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#install-linux" name="install-linux" shape="rect">1.&nbsp;Installing cuDNN on Linux</a></h2>
+                  <div class="body taskbody">
+                     <div class="abstract"><span class="shortdesc"></span></div>
+                     <div class="section" id="install-linux__section_svn_yq2_lwb"><a name="install-linux__section_svn_yq2_lwb" shape="rect">
+                           <!-- --></a><p class="p"></p>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="prerequisites"><a name="prerequisites" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#prerequisites" name="prerequisites" shape="rect">1.1.&nbsp;Prerequisites</a></h3>
+                     <div class="body conbody">
+                        <div class="abstract">For the latest compatibility software versions of the OS, NVIDIA CUDA, the CUDA
+                           driver, and the NVIDIA hardware, refer to the <a class="xref" href="https://docs.nvidia.com/deeplearning/sdk/cudnn-support-matrix/index.html" target="_blank" shape="rect">NVIDIA cuDNN Support
+                              Matrix</a>. <span class="shortdesc"></span></div>
+                        <p class="p"></p>
+                     </div>
+                     <div class="topic task nested2" id="installdriver"><a name="installdriver" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#installdriver" name="installdriver" shape="rect">1.1.1.&nbsp;Installing NVIDIA Graphics Drivers</a></h3>
+                        <div class="body taskbody">
+                           <div class="abstract"><span class="shortdesc">Install up-to-date NVIDIA graphics drivers on your Linux system.</span></div>
+                           <ol class="ol steps">
+                              <li class="li step"><span class="ph cmd">Go to: <a class="xref" href="https://www.nvidia.com/Download/index.aspx?lang=en-us" target="_blank" shape="rect">NVIDIA download drivers</a></span></li>
+                              <li class="li step"><span class="ph cmd">Select the GPU and OS version from the drop-down menus.</span></li>
+                              <li class="li step"><span class="ph cmd">Download and install the NVIDIA graphics driver as indicated on that web page.
+                                    For more information, select the <span class="ph uicontrol">ADDITIONAL INFORMATION</span>
+                                    tab for step-by-step instructions for installing a driver.</span></li>
+                              <li class="li step"><span class="ph cmd">Restart your system to ensure that the graphics driver takes effect.</span></li>
+                           </ol>
+                        </div>
+                     </div>
+                     <div class="topic task nested2" id="installcuda"><a name="installcuda" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#installcuda" name="installcuda" shape="rect">1.1.2.&nbsp;Installing the CUDA Toolkit for Linux</a></h3>
+                        <div class="body taskbody">
+                           <div class="abstract">Refer to the following instructions for installing CUDA on Linux, including the CUDA
+                              driver and toolkit: <a class="xref" href="http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html" target="_blank" shape="rect">NVIDIA CUDA Installation Guide for
+                                 Linux</a>. <span class="shortdesc"></span></div>
+                           <div class="section" id="installcuda__section_g3y_552_qrb"><a name="installcuda__section_g3y_552_qrb" shape="rect">
+                                 <!-- --></a><p class="p"></p>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="topic task nested2" id="install-zlib-linux"><a name="install-zlib-linux" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#install-zlib-linux" name="install-zlib-linux" shape="rect">1.1.3.&nbsp;Installing Zlib</a></h3>
+                        <div class="body taskbody">
+                           <div class="abstract"><span class="shortdesc"></span></div>
+                           <div class="section context">
+                              <div class="p">For Ubuntu users, to install the zlib package,
+                                 run:<pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">sudo apt-get install zlib1g</kbd></pre></div>
+                              <div class="p">For RHEL users, to install the zlib package,
+                                 run:<pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">sudo yum install zlib</kbd></pre></div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic task nested1" id="download"><a name="download" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#download" name="download" shape="rect">1.2.&nbsp;Downloading cuDNN for Linux</a></h3>
+                     <div class="body taskbody">
+                        <div class="abstract">In order to download cuDNN, ensure you are registered for the <a class="xref" href="https://developer.nvidia.com/accelerated-computing-developer" target="_blank" shape="rect">NVIDIA Developer Program</a>. <span class="shortdesc"></span></div>
+                        <ol class="ol steps">
+                           <li class="li step"><span class="ph cmd">Go to: <a class="xref" href="https://developer.nvidia.com/cudnn" target="_blank" shape="rect">NVIDIA cuDNN home page</a>.</span></li>
+                           <li class="li step"><span class="ph cmd">Click <span class="ph uicontrol">Download</span>.</span></li>
+                           <li class="li step"><span class="ph cmd">Complete the short survey and click <span class="ph uicontrol">Submit</span>.</span></li>
+                           <li class="li step"><span class="ph cmd">Accept the Terms and Conditions. A list of available download versions of cuDNN
+                                 displays. </span></li>
+                           <li class="li step"><span class="ph cmd">Select the cuDNN version that you want to install. A list of available
+                                 resources displays. </span></li>
+                        </ol>
+                     </div>
+                  </div>
+                  <div class="topic task nested1" id="installlinux"><a name="installlinux" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#installlinux" name="installlinux" shape="rect">1.3.&nbsp;Installing on Linux</a></h3>
+                     <div class="body taskbody">
+                        <div class="abstract"><span class="shortdesc">The following steps describe how to build a cuDNN dependent program. Choose the
+                              installation method that meets your environment needs. For example, the tar file
+                              installation applies to all Linux platforms. The Debian package installation applies to
+                              Debian 11, Ubuntu 18.04, Ubuntu 20.04, and 22.04. The RPM package installation applies
+                              to RHEL7, RHEL8, and RHEL9.</span></div>
+                        <div class="section context">
+                           <div class="p">In the following sections:<a name="installlinux__ul_cmd_rpj_r1b" shape="rect">
+                                 <!-- --></a><ul class="ul" id="installlinux__ul_cmd_rpj_r1b">
+                                 <li class="li">your CUDA directory path is referred to as <samp class="ph codeph">/usr/local/cuda/</samp></li>
+                                 <li class="li">your cuDNN download path is referred to as
+                                    <samp class="ph codeph">&lt;cudnnpath&gt;</samp></li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="topic task nested2" id="installlinux-tar"><a name="installlinux-tar" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#installlinux-tar" name="installlinux-tar" shape="rect">1.3.1.&nbsp;Tar File Installation</a></h3>
+                        <div class="body taskbody">
+                           <div class="abstract"><span class="shortdesc">Before issuing the following commands, you must replace <samp class="ph codeph">X.Y</samp> and
+                                 <samp class="ph codeph">v8.x.x.x</samp> with your specific CUDA and cuDNN versions and package
+                                 date.</span></div><a name="installlinux-tar__steps_yvz_4l2_r1b" shape="rect">
+                              <!-- --></a><ol class="ol steps" id="installlinux-tar__steps_yvz_4l2_r1b">
+                              <li class="li step"><span class="ph cmd">Navigate to your <samp class="ph codeph">&lt;cudnnpath&gt;</samp> directory containing the cuDNN
+                                    tar file.</span></li>
+                              <li class="li step"><span class="ph cmd">Unzip the cuDNN package. </span><div class="p"><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">$ tar -xvf cudnn-linux-$arch-8.x.x.x_cudaX.Y-archive.tar.xz</kbd></pre>
+                                    
+                                    Where
+                                    <samp class="ph codeph">$arch</samp> is <samp class="ph codeph">x86_64</samp>,
+                                    <samp class="ph codeph">sbsa</samp>, or <samp class="ph codeph">ppc64le</samp>.
+                                 </div>
+                              </li>
+                              <li class="li step"><span class="ph cmd">Copy the following files into the CUDA toolkit directory.</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">$ sudo cp cudnn-*-archive/include/cudnn*.h /usr/local/cuda/include 
+$ sudo cp -P cudnn-*-archive/lib/libcudnn* /usr/local/cuda/lib64 
+$ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+</kbd></pre></li>
+                           </ol>
+                        </div>
+                     </div>
+                     <div class="topic task nested2" id="installlinux-deb"><a name="installlinux-deb" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#installlinux-deb" name="installlinux-deb" shape="rect">1.3.2.&nbsp;Debian Local Installation</a></h3>
+                        <div class="body taskbody">
+                           <div class="abstract"><span class="shortdesc">Download the Debian local repository installation package. Before issuing the
+                                 following commands, you must replace <samp class="ph codeph">X.Y</samp> and <samp class="ph codeph">8.x.x.x</samp>
+                                 with your specific CUDA and cuDNN versions.</span></div><a name="installlinux-deb__steps_uwm_vqj_r1b" shape="rect">
+                              <!-- --></a><ol class="ol steps" id="installlinux-deb__steps_uwm_vqj_r1b">
+                              <li class="li step"><span class="ph cmd">Navigate to your <samp class="ph codeph">downloads</samp> directory containing the cuDNN
+                                    Debian local installer file.</span></li>
+                              <li class="li step"><span class="ph cmd">Enable the local repository.</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">sudo dpkg -i cudnn-local-repo-$distro-8.x.x.x_1.0-1_amd64.deb</kbd></pre>
+                                 
+                                 
+                                 or
+                                 <pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">sudo dpkg -i cudnn-local-repo-$distro-8.x.x.x_1.0-1_arm64.deb</kbd></pre><p class="p">Where
+                                    <samp class="ph codeph">$distro</samp> is <samp class="ph codeph">ubuntu1804</samp>,
+                                    <samp class="ph codeph">ubuntu2004</samp>, <samp class="ph codeph">ubuntu2204</samp>, or
+                                    <samp class="ph codeph">debian11</samp>.
+                                 </p>
+                              </li>
+                              <li class="li step"><span class="ph cmd">Import the CUDA GPG key.</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">sudo cp /var/cudnn-local-repo-*/cudnn-local-*-keyring.gpg /usr/share/keyrings/</kbd></pre></li>
+                              <li class="li step"><span class="ph cmd">Refresh the repository metadata.</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">sudo apt-get update</kbd></pre></li>
+                              <li class="li step"><span class="ph cmd">Install the runtime library.</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">sudo apt-get install libcudnn8=8.x.x.x-1+cudaX.Y</kbd></pre></li>
+                              <li class="li step"><span class="ph cmd">Install the developer library.</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">sudo apt-get install libcudnn8-dev=8.x.x.x-1+cudaX.Y</kbd></pre></li>
+                              <li class="li step"><span class="ph cmd">Install the code samples.</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">sudo apt-get install libcudnn8-samples=8.x.x.x-1+cudaX.Y</kbd></pre></li>
+                           </ol>
+                        </div>
+                     </div>
+                     <div class="topic task nested2" id="installlinux-rpm"><a name="installlinux-rpm" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#installlinux-rpm" name="installlinux-rpm" shape="rect">1.3.3.&nbsp;RPM Local Installation</a></h3>
+                        <div class="body taskbody">
+                           <div class="abstract"><span class="shortdesc">Download the RPM local repository installation package. Before issuing the
+                                 following commands, you must replace <samp class="ph codeph">X.Y</samp> and <samp class="ph codeph">8.x.x.x</samp>
+                                 with your specific CUDA and cuDNN versions.</span></div><a name="installlinux-rpm__steps_uwm_vqj_r1b" shape="rect">
+                              <!-- --></a><ol class="ol steps" id="installlinux-rpm__steps_uwm_vqj_r1b">
+                              <li class="li step"><span class="ph cmd">Navigate to your <samp class="ph codeph">downloads</samp> directory containing the cuDNN RPM
+                                    local installer file.</span></li>
+                              <li class="li step"><span class="ph cmd">Enable the local repository.</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">sudo rpm -i cudnn-local-repo-$distro-8.x.x.x-1.0-1.x86_64.rpm</kbd></pre>
+                                 
+                                 
+                                 or
+                                 <pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">sudo rpm -i cudnn-local-repo-$distro-8.x.x.x-1.0-1.aarch64.rpm</kbd></pre><p class="p">Where
+                                    <samp class="ph codeph">$distro</samp> is <samp class="ph codeph">rhel7</samp>,
+                                    <samp class="ph codeph">rhel8</samp>, or <samp class="ph codeph">rhel9</samp>.
+                                 </p>
+                              </li>
+                              <li class="li step"><span class="ph cmd">Refresh the repository metadata.</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">sudo yum clean all</kbd></pre></li>
+                              <li class="li step"><span class="ph cmd">Install the runtime library.</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">sudo yum install libcudnn8-8.x.x.x-1.cudaX.Y</kbd></pre></li>
+                              <li class="li step"><span class="ph cmd">Install the developer library.</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">sudo yum install libcudnn8-devel-8.x.x.x-1.cudaX.Y</kbd></pre></li>
+                              <li class="li step"><span class="ph cmd">Install the code samples.</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">sudo yum install libcudnn8-samples-8.x.x.x-1.cudaX.Y</kbd></pre></li>
+                           </ol>
+                        </div>
+                     </div>
+                     <div class="topic concept nested2" id="cudnn-package-manager-installation-overview"><a name="cudnn-package-manager-installation-overview" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cudnn-package-manager-installation-overview" name="cudnn-package-manager-installation-overview" shape="rect">1.3.4.&nbsp;Package Manager Installation</a></h3>
+                        <div class="body conbody">
+                           <div class="abstract"><span class="shortdesc">The Package Manager installation interfaces with your system's package
+                                 			manager.</span></div>
+                           <p class="p">If the actual installation packages are available online, then the package manager will
+                              			automatically download them and install them.
+                           </p>
+                        </div>
+                        <div class="topic task nested3" id="package-manager-ubuntu-install"><a name="package-manager-ubuntu-install" shape="rect">
+                              <!-- --></a><h3 class="title topictitle2"><a href="#package-manager-ubuntu-install" name="package-manager-ubuntu-install" shape="rect">1.3.4.1.&nbsp;Ubuntu/Debian Network Installation</a></h3>
+                           <div class="body taskbody">
+                              <div class="abstract"><span class="shortdesc">These are the installation instructions for Debian 11, Ubuntu 18.04, Ubuntu
+                                    20.04, and 22.04 users.</span></div>
+                              <ol class="ol steps">
+                                 <li class="li step"><span class="ph cmd">Enable the network repository. Perform the steps described in the <a class="xref" href="https://docs.nvidia.com/cuda/cuda-installation-guide-linux/#network-repo-installation-for-ubuntu" target="_blank" shape="rect">NVIDIA CUDA Installation Guide for
+                                          Ubuntu</a> or the <a class="xref" href="https://docs.nvidia.com/cuda/cuda-installation-guide-linux/#network-repo-installation-for-debian" target="_blank" shape="rect">NVIDIA CUDA Installation Guide for
+                                          Debian</a>.</span><div class="note note"><span class="notetitle">Note:</span> For the <samp class="ph codeph">$distro/$arch</samp> noted in the above links, refer to
+                                       the <a class="xref" href="https://docs.nvidia.com/deeplearning/cudnn/support-matrix/index.html#cudnn-versions-linux" target="_blank" shape="rect">NVIDIA cuDNN Support Matrix</a> for
+                                       the <samp class="ph codeph">$distro/$arch</samp> supported versions, as cuDNN’s Support
+                                       Matrix might differ from CUDA.
+                                    </div>
+                                    <div class="p">Where <samp class="ph codeph">$distro/$arch</samp> should be replaced by one of the
+                                       following:<a name="package-manager-ubuntu-install__ul_l5b_xhd_wxb" shape="rect">
+                                          <!-- --></a><ul class="ul" id="package-manager-ubuntu-install__ul_l5b_xhd_wxb">
+                                          <li class="li"><samp class="ph codeph">ubuntu1804/x86_64</samp></li>
+                                          <li class="li"><samp class="ph codeph">ubuntu2004/x86_64</samp></li>
+                                          <li class="li"><samp class="ph codeph">ubuntu2204/x86_64</samp></li>
+                                          <li class="li"><samp class="ph codeph">debian11/x86_64</samp></li>
+                                          <li class="li"><samp class="ph codeph">ubuntu2004/sbsa</samp></li>
+                                          <li class="li"><samp class="ph codeph">ubuntu2204/sbsa</samp></li>
+                                       </ul>
+                                    </div>
+                                 </li>
+                                 <li class="li step"><span class="ph cmd">Install the cuDNN library and cuDNN samples:</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">sudo apt-get install libcudnn8=${cudnn_version}-1+${cuda_version}
+sudo apt-get install libcudnn8-dev=${cudnn_version}-1+${cuda_version}
+sudo apt-get install libcudnn8-samples=${cudnn_version}-1+${cuda_version}
+</kbd></pre><div class="p">Where:<a name="package-manager-ubuntu-install__ul_y35_r4n_rnb" shape="rect">
+                                          <!-- --></a><ul class="ul" id="package-manager-ubuntu-install__ul_y35_r4n_rnb">
+                                          <li class="li"><samp class="ph codeph">${cudnn_version}</samp> is <samp class="ph codeph">8.9.7.*</samp></li>
+                                          <li class="li"><samp class="ph codeph">${cuda_version}</samp> is <samp class="ph codeph">cuda12.2</samp> or
+                                             <samp class="ph codeph">cuda11.8</samp></li>
+                                       </ul>
+                                    </div>
+                                 </li>
+                              </ol>
+                           </div>
+                        </div>
+                        <div class="topic task nested3" id="package-manager-rhel-install"><a name="package-manager-rhel-install" shape="rect">
+                              <!-- --></a><h3 class="title topictitle2"><a href="#package-manager-rhel-install" name="package-manager-rhel-install" shape="rect">1.3.4.2.&nbsp;RHEL Network Installation</a></h3>
+                           <div class="body taskbody">
+                              <div class="abstract"><span class="shortdesc">These are the installation instructions for RHEL7, RHEL8, and RHEL9
+                                    users.</span></div>
+                              <ol class="ol steps">
+                                 <li class="li step"><span class="ph cmd">Enable the repository:</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">sudo yum-config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/$distro/$arch/cuda-$distro.repo
+sudo yum clean all
+</kbd></pre><div class="p">Where <samp class="ph codeph">$distro/$arch</samp> should be replaced by one of the
+                                       following:<a name="package-manager-rhel-install__ul_ryq_d3d_wxb" shape="rect">
+                                          <!-- --></a><ul class="ul" id="package-manager-rhel-install__ul_ryq_d3d_wxb">
+                                          <li class="li"><samp class="ph codeph">rhel7/x86_64</samp></li>
+                                          <li class="li"><samp class="ph codeph">rhel8/x86_64</samp></li>
+                                          <li class="li"><samp class="ph codeph">rhel9/x86_64</samp></li>
+                                          <li class="li"><samp class="ph codeph">rhel8/ppc64le</samp></li>
+                                          <li class="li"><samp class="ph codeph">rhel8/sbsa</samp></li>
+                                          <li class="li"><samp class="ph codeph">rhel9/sbsa</samp></li>
+                                       </ul>
+                                    </div>
+                                 </li>
+                                 <li class="li step"><span class="ph cmd">Install the cuDNN library and cuDNN samples:</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">sudo yum install libcudnn8-${cudnn_version}-1.${cuda_version}
+sudo yum install libcudnn8-devel-${cudnn_version}-1.${cuda_version}
+sudo yum install libcudnn8-samples-${cudnn_version}-1.${cuda_version}
+</kbd></pre><div class="p">Where:<a name="package-manager-rhel-install__ul_y35_r4n_rnb" shape="rect">
+                                          <!-- --></a><ul class="ul" id="package-manager-rhel-install__ul_y35_r4n_rnb">
+                                          <li class="li"><samp class="ph codeph">${cudnn_version}</samp> is <samp class="ph codeph">8.9.7.*</samp></li>
+                                          <li class="li"><samp class="ph codeph">${cuda_version}</samp> is <samp class="ph codeph">cuda12.2</samp> or
+                                             <samp class="ph codeph">cuda11.8</samp></li>
+                                       </ul>
+                                    </div>
+                                 </li>
+                              </ol>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic task nested1" id="verify"><a name="verify" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#verify" name="verify" shape="rect">1.4.&nbsp;Verifying the Install on Linux</a></h3>
+                     <div class="body taskbody">
+                        <div class="abstract"><span class="shortdesc">To verify that cuDNN is installed and is running properly, compile the
+                              <samp class="ph codeph">mnistCUDNN</samp> sample located in the
+                              <samp class="ph codeph">/usr/src/cudnn_samples_v8</samp> directory in the Debian file. </span></div>
+                        <ol class="ol steps">
+                           <li class="li step"><span class="ph cmd">Copy the cuDNN samples to a writable path.</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">$cp -r /usr/src/cudnn_samples_v8/ $HOME</kbd></pre></li>
+                           <li class="li step"><span class="ph cmd">Go to the writable path.</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">$ cd  $HOME/cudnn_samples_v8/mnistCUDNN</kbd></pre></li>
+                           <li class="li step"><span class="ph cmd">Compile the <samp class="ph codeph">mnistCUDNN</samp> sample.</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">$make clean &amp;&amp; make</kbd></pre></li>
+                           <li class="li step"><span class="ph cmd">Run the <samp class="ph codeph">mnistCUDNN</samp> sample.</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">$ ./mnistCUDNN</kbd></pre><div class="p">If cuDNN is properly installed and running on your Linux system, you will see
+                                 a message similar to the
+                                 following:<pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">Test passed!</kbd></pre></div>
+                           </li>
+                        </ol>
+                     </div>
+                  </div>
+                  <div class="topic task nested1" id="upgrade"><a name="upgrade" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#upgrade" name="upgrade" shape="rect">1.5.&nbsp;Upgrading from cuDNN 7.x.x to cuDNN 8.x.x</a></h3>
+                     <div class="body taskbody">
+                        <div class="abstract"><span class="shortdesc">Since version 8 can coexist with previous versions of cuDNN, if the user has an
+                              older version of cuDNN such as v6 or v7, installing version 8 will not automatically
+                              delete an older revision. Therefore, if the user wants the latest version, install cuDNN
+                              version 8 by following the installation steps.</span></div>
+                        <div class="section context">
+                           <p class="p">To upgrade from cuDNN v7 to v8, refer to the <a class="xref" href="index.html#cudnn-package-manager-installation-overview" title="The Package Manager installation interfaces with your system's package manager." shape="rect">Package Manager Installation</a> section and follow the
+                              steps for your OS.
+                           </p>
+                           <p class="p">To switch between v7 and v8 installations, issue <samp class="ph codeph">sudo update-alternatives
+                                 --config libcudnn</samp> and choose the appropriate cuDNN version.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic task nested1" id="troubleshoot"><a name="troubleshoot" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#troubleshoot" name="troubleshoot" shape="rect">1.6.&nbsp;Troubleshooting</a></h3>
+                     <div class="body taskbody">
+                        <div class="abstract">Join the <a class="xref" href="https://devtalk.nvidia.com/" target="_blank" shape="rect">NVIDIA Developer Forum</a> to post questions and follow
+                           discussions. <span class="shortdesc"></span></div>
+                        <div class="section" id="troubleshoot__section_ngn_z52_qrb"><a name="troubleshoot__section_ngn_z52_qrb" shape="rect">
+                              <!-- --></a><p class="p"></p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic task nested0" id="install-windows"><a name="install-windows" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#install-windows" name="install-windows" shape="rect">2.&nbsp;Installing cuDNN on Windows</a></h2>
+                  <div class="body taskbody">
+                     <div class="abstract"><span class="shortdesc"></span></div>
+                     <div class="section" id="install-windows__section_l5c_1v2_qrb"><a name="install-windows__section_l5c_1v2_qrb" shape="rect">
+                           <!-- --></a><p class="p"></p>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="prerequisites-windows"><a name="prerequisites-windows" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#prerequisites-windows" name="prerequisites-windows" shape="rect">2.1.&nbsp;Prerequisites</a></h3>
+                     <div class="body conbody">
+                        <div class="abstract">For the latest compatibility software versions of the OS, CUDA, the CUDA driver, and
+                           the NVIDIA hardware, refer to the <a class="xref" href="https://docs.nvidia.com/deeplearning/sdk/cudnn-support-matrix/index.html" target="_blank" shape="rect">NVIDIA cuDNN Support
+                              Matrix</a>. <span class="shortdesc"></span></div>
+                        <p class="p"></p>
+                     </div>
+                     <div class="topic task nested2" id="installdriver-windows"><a name="installdriver-windows" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#installdriver-windows" name="installdriver-windows" shape="rect">2.1.1.&nbsp;Installing NVIDIA Graphic Drivers</a></h3>
+                        <div class="body taskbody">
+                           <div class="abstract"><span class="shortdesc">Install up-to-date NVIDIA graphics drivers on your Windows system.</span></div>
+                           <ol class="ol steps">
+                              <li class="li step"><span class="ph cmd">Go to: <a class="xref" href="http://www.nvidia.com/Download/index.aspx?lang=en-us" target="_blank" shape="rect">NVIDIA download drivers</a></span></li>
+                              <li class="li step"><span class="ph cmd">Select the GPU and OS version from the drop-down menus.</span></li>
+                              <li class="li step"><span class="ph cmd">Download and install the NVIDIA driver as indicated on that web page. For more
+                                    information, select the <span class="ph uicontrol">ADDITIONAL INFORMATION</span> tab for
+                                    step-by-step instructions for installing a driver.</span></li>
+                              <li class="li step"><span class="ph cmd">Restart your system to ensure that the graphics driver takes effect.</span></li>
+                           </ol>
+                        </div>
+                     </div>
+                     <div class="topic task nested2" id="installcuda-windows"><a name="installcuda-windows" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#installcuda-windows" name="installcuda-windows" shape="rect">2.1.2.&nbsp;Installing the CUDA Toolkit for Windows</a></h3>
+                        <div class="body taskbody">
+                           <div class="abstract">Refer to the following instructions for installing CUDA on Windows, including the CUDA
+                              driver and toolkit: <a class="xref" href="http://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html" target="_blank" shape="rect">NVIDIA CUDA Installation Guide for Windows</a>. <span class="shortdesc"></span></div>
+                           <div class="section" id="installcuda-windows__section_ogd_bv2_qrb"><a name="installcuda-windows__section_ogd_bv2_qrb" shape="rect">
+                                 <!-- --></a><p class="p"></p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic task nested1" id="download-windows"><a name="download-windows" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#download-windows" name="download-windows" shape="rect">2.2.&nbsp;Downloading cuDNN for Windows</a></h3>
+                     <div class="body taskbody">
+                        <div class="abstract">
+                           <p class="p">In order to download cuDNN, ensure you are registered for the <a class="xref" href="https://developer.nvidia.com/accelerated-computing-developer" target="_blank" shape="rect">NVIDIA Developer Program</a>.
+                           </p>
+                           <div class="shortdesc"></div>
+                        </div>
+                        <ol class="ol steps">
+                           <li class="li step"><span class="ph cmd">Go to: <a class="xref" href="https://developer.nvidia.com/cudnn" target="_blank" shape="rect">NVIDIA cuDNN home page</a>.</span></li>
+                           <li class="li step"><span class="ph cmd">Click <span class="ph uicontrol">Download</span>.</span></li>
+                           <li class="li step"><span class="ph cmd">Complete the short survey and click <span class="ph uicontrol">Submit</span>.</span></li>
+                           <li class="li step"><span class="ph cmd">Accept the Terms and Conditions. A list of available download versions of cuDNN
+                                 displays. </span></li>
+                           <li class="li step"><span class="ph cmd">Select the cuDNN version that you want to install. A list of available
+                                 resources displays.</span></li>
+                           <li class="li step"><span class="ph cmd">Download the cuDNN package for Windows (zip).</span></li>
+                        </ol>
+                     </div>
+                  </div>
+                  <div class="topic task nested1" id="installwindows"><a name="installwindows" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#installwindows" name="installwindows" shape="rect">2.3.&nbsp;Installing on Windows</a></h3>
+                     <div class="body taskbody">
+                        <div class="abstract"><span class="shortdesc">The following steps describe how to build a cuDNN dependent program. </span></div>
+                        <div class="section context" id="installwindows__context_npp_jqz_n5b"><a name="installwindows__context_npp_jqz_n5b" shape="rect">
+                              <!-- --></a><p class="p">You must replace <samp class="ph codeph">8.x</samp> and <samp class="ph codeph">8.x.y.z</samp> with your specific
+                              cuDNN version.
+                           </p>
+                           <p class="p"><strong class="ph b">Package installation (zip)</strong></p>
+                           <p class="p">In the following steps, the package directory path is referred to as
+                              <samp class="ph codeph">&lt;packagepath&gt;</samp>.
+                           </p>
+                        </div><a name="installwindows__steps_u1g_xgr_r1b" shape="rect">
+                           <!-- --></a><ol class="ol steps" id="installwindows__steps_u1g_xgr_r1b">
+                           <li class="li step"><span class="ph cmd">Navigate to your <samp class="ph codeph">&lt;packagepath&gt;</samp> directory containing the
+                                 cuDNN package.</span></li>
+                           <li class="li step"><span class="ph cmd">Unzip the cuDNN package.</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">cudnn-windows-x86_64-*-archive.zip</kbd></pre></li>
+                           <li class="li step"><span class="ph cmd">Copy the following files from the unzipped package into the NVIDIA cuDNN
+                                 directory.</span><a name="installwindows__substeps_zcd_xzm_s1b" shape="rect">
+                                 <!-- --></a><ol type="a" class="ol substeps" id="installwindows__substeps_zcd_xzm_s1b">
+                                 <li class="li substep"><span class="ph cmd">Copy <samp class="ph codeph">bin\cudnn*.dll</samp> to <samp class="ph codeph">C:\Program
+                                          Files\NVIDIA\CUDNN\v8.x\bin</samp>.</span></li>
+                                 <li class="li substep"><span class="ph cmd">Copy <samp class="ph codeph">include\cudnn*.h</samp> to <samp class="ph codeph">C:\Program
+                                          Files\NVIDIA\CUDNN\v8.x\include</samp>.</span></li>
+                                 <li class="li substep"><span class="ph cmd">Copy <samp class="ph codeph">lib\cudnn*.lib</samp> to <samp class="ph codeph">C:\Program
+                                          Files\NVIDIA\CUDNN\v8.x\lib</samp>.</span></li>
+                              </ol>
+                           </li>
+                           <li class="li step"><span class="ph cmd">Set the following environment variable to point to where cuDNN is located. To
+                                 access the value of the <samp class="ph codeph">$(PATH)</samp> environment variable, perform
+                                 the following steps:</span><a name="installwindows__substeps_xdy_jdn_s1b" shape="rect">
+                                 <!-- --></a><ol type="a" class="ol substeps" id="installwindows__substeps_xdy_jdn_s1b">
+                                 <li class="li substep"><span class="ph cmd">Open a command prompt from the <span class="ph uicontrol">Start</span> menu.</span></li>
+                                 <li class="li substep"><span class="ph cmd">Type <samp class="ph codeph">Run</samp> and hit <span class="ph uicontrol">Enter</span>.</span></li>
+                                 <li class="li substep"><span class="ph cmd">Issue the <samp class="ph codeph">control sysdm.cpl</samp> command.</span></li>
+                                 <li class="li substep"><span class="ph cmd">Select the <span class="ph uicontrol">Advanced</span> tab at the top of the
+                                       window. </span></li>
+                                 <li class="li substep"><span class="ph cmd">Click <span class="ph uicontrol">Environment Variables</span> at the bottom of the
+                                       window.</span></li>
+                                 <li class="li substep"><span class="ph cmd">Add the NVIDIA cuDNN <samp class="ph codeph">bin</samp> directory path to the PATH
+                                       variable:</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">Variable Name: PATH 
+Value to Add: C:\Program Files\NVIDIA\CUDNN\v8.x\bin
+</kbd></pre></li>
+                              </ol>
+                           </li>
+                           <li class="li step"><span class="ph cmd">Add cuDNN to your Visual Studio project.</span><a name="installwindows__substeps_tyl_1m2_r1b" shape="rect">
+                                 <!-- --></a><ol type="a" class="ol substeps" id="installwindows__substeps_tyl_1m2_r1b">
+                                 <li class="li substep"><span class="ph cmd">Open the Visual Studio project, right-click on the project name in
+                                       <strong class="ph b">Solution Explorer</strong>, and choose <strong class="ph b">Properties</strong>.</span></li>
+                                 <li class="li substep"><span class="ph cmd">Click <strong class="ph b">VC++ Directories </strong>and append <samp class="ph codeph">C:\Program
+                                          Files\NVIDIA\CUDNN\v8.x\include</samp> to the <strong class="ph b">Include
+                                          Directories</strong> field.</span></li>
+                                 <li class="li substep"><span class="ph cmd">Click <strong class="ph b">Linker &gt; General</strong> and append <samp class="ph codeph">C:\Program
+                                          Files\NVIDIA\CUDNN\v8.x\lib</samp> to the <strong class="ph b">Additional Library
+                                          Directories</strong> field.</span></li>
+                                 <li class="li substep"><span class="ph cmd">Click <strong class="ph b">Linker &gt; Input</strong> and append <samp class="ph codeph">cudnn.lib</samp> to
+                                       the <strong class="ph b">Additional Dependencies </strong>field and click <strong class="ph b">OK</strong>.</span></li>
+                              </ol>
+                           </li>
+                        </ol>
+                     </div>
+                  </div>
+                  <div class="topic task nested1" id="upgrade-windows"><a name="upgrade-windows" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#upgrade-windows" name="upgrade-windows" shape="rect">2.4.&nbsp;Upgrading cuDNN</a></h3>
+                     <div class="body taskbody">
+                        <div class="abstract">Navigate to the directory containing cuDNN and delete the old cuDNN
+                           <samp class="ph codeph">bin</samp>, <samp class="ph codeph">lib</samp>, and <samp class="ph codeph">header</samp> files. Remove
+                           the path to the directory containing cuDNN from the <samp class="ph codeph">$(PATH)</samp> environment
+                           variable. Reinstall a newer cuDNN version by following the steps in <a class="xref" href="index.html#installwindows" title="The following steps describe how to build a cuDNN dependent program." shape="rect">Installing on Windows</a>. <span class="shortdesc"></span></div>
+                        <div class="section" id="upgrade-windows__section_qfs_3v2_qrb"><a name="upgrade-windows__section_qfs_3v2_qrb" shape="rect">
+                              <!-- --></a><p class="p"></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic task nested1" id="troubleshoot-windows"><a name="troubleshoot-windows" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#troubleshoot-windows" name="troubleshoot-windows" shape="rect">2.5.&nbsp;Troubleshooting</a></h3>
+                     <div class="body taskbody">
+                        <div class="abstract">Join the <a class="xref" href="https://devtalk.nvidia.com/" target="_blank" shape="rect">NVIDIA Developer Forum</a> to post questions and follow
+                           discussions. <span class="shortdesc"></span></div>
+                        <div class="section" id="troubleshoot-windows__section_ddf_jv2_qrb"><a name="troubleshoot-windows__section_ddf_jv2_qrb" shape="rect">
+                              <!-- --></a><p class="p"></p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic task nested0" id="add-lib-dep-pro"><a name="add-lib-dep-pro" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#add-lib-dep-pro" name="add-lib-dep-pro" shape="rect">3.&nbsp;Building a cuDNN Dependent Program</a></h2>
+                  <div class="body taskbody">
+                     <div class="abstract"><span class="shortdesc"></span></div>
+                     <div class="section" id="add-lib-dep-pro__section_nds_j3y_wwb"><a name="add-lib-dep-pro__section_nds_j3y_wwb" shape="rect">
+                           <!-- --></a><p class="p"></p>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="depend"><a name="depend" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#depend" name="depend" shape="rect">3.1.&nbsp;Including cuDNN’s Dependencies</a></h3>
+                     <div class="body conbody">
+                        <div class="abstract"><span class="shortdesc">Because cuDNN uses symbols defined in external libraries, you need to ensure that
+                              the linker can locate these libraries while building a cuDNN dependent program. One way
+                              to achieve this is by explicitly specifying them on the linker command.</span></div>
+                        <div class="section" id="depend__section_lqv_yms_nvb"><a name="depend__section_lqv_yms_nvb" shape="rect">
+                              <!-- --></a><h3 class="title sectiontitle">For linker dependencies for the dynamic cuDNN libs</h3>
+                           <p class="p">Linux: Add <samp class="ph codeph">-lcublas -lcublasLt -lz</samp> to the linker command.
+                           </p>
+                           <p class="p">Windows: Add <samp class="ph codeph">cublas.lib cublasLt.lib zlibwapi.lib</samp> to the linker
+                              command.
+                           </p>
+                        </div>
+                        <div class="section" id="depend__section_hzl_1ns_nvb"><a name="depend__section_hzl_1ns_nvb" shape="rect">
+                              <!-- --></a><h3 class="title sectiontitle">Linker dependencies for the static cuDNN libs</h3>
+                           <p class="p">Linux: Add <samp class="ph codeph">-lcublas_static -lcublasLt_static -lz -lculibos -lnvrtc_static
+                                 -lnvrtc-builtins_static -lnvptxcompiler_static -lcudart_static</samp> to the
+                              linker command.
+                           </p>
+                           <p class="p">Windows: Not applicable. Static cuDNN libs for Windows are not supported. </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic concept nested1" id="inter-lib-depend"><a name="inter-lib-depend" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#inter-lib-depend" name="inter-lib-depend" shape="rect">3.2.&nbsp;cuDNN’s Inter-Library Dependencies</a></h3>
+                     <div class="body conbody">
+                        <div class="abstract">Since <a class="xref" href="https://docs.nvidia.com/deeplearning/cudnn/api/index.html#overview" target="_blank" shape="rect">cuDNN is split into several libraries</a>,
+                           dependencies between them need to be taken into account. <span class="shortdesc"></span></div>
+                        <div class="p">For example, when statically linking <samp class="ph codeph">libcudnn_cnn_infer_static.a</samp> into an
+                           application, <samp class="ph codeph">libcudnn_ops_infer_static.a</samp> is also needed, in this order
+                           (a dependent library followed by its dependency).
+                           Specifically:<pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">-static -Wl,--whole-archive ${CUDNN_PATH}/libcudnn_cnn_infer_static.a ${CUDNN_PATH}/libcudnn_ops_infer_static.a -Wl,--no-whole-archive</kbd></pre></div>
+                        <p class="p">The chain of dependencies can be found in the <a class="xref" href="https://docs.nvidia.com/deeplearning/cudnn/api/index.html" target="_blank" shape="rect">NVIDIA cuDNN API Reference</a>.
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="cross-compiling-cudnn-overview"><a name="cross-compiling-cudnn-overview" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#cross-compiling-cudnn-overview" name="cross-compiling-cudnn-overview" shape="rect">4.&nbsp;Cross-Compiling cuDNN Samples</a></h2>
+                  <div class="body conbody">
+                     <div class="abstract"><span class="shortdesc">This section describes how to cross-compile cuDNN samples.</span></div>
+                     <p class="p"></p>
+                  </div>
+                  <div class="topic concept nested1" id="overview-linux-aarch-sbsa-cross-compile"><a name="overview-linux-aarch-sbsa-cross-compile" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#overview-linux-aarch-sbsa-cross-compile" name="overview-linux-aarch-sbsa-cross-compile" shape="rect">4.1.&nbsp;Linux AArch64 SBSA</a></h3>
+                     <div class="body conbody">
+                        <div class="abstract"><span class="shortdesc">Follow the steps in this section to cross-compile cuDNN samples on Linux AArch64.
+                              			Linux AArch64 incorporates ARM<sup>®</sup> based CPU cores for Server Base System
+                              			Architecture (SBSA).</span></div>
+                        <p class="p"></p>
+                     </div>
+                     <div class="topic task nested2" id="cross-compiling-install-cuda-sbsa"><a name="cross-compiling-install-cuda-sbsa" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cross-compiling-install-cuda-sbsa" name="cross-compiling-install-cuda-sbsa" shape="rect">4.1.1.&nbsp;Installing the CUDA Toolkit for Linux AArch64 SBSA</a></h3>
+                        <div class="body taskbody">
+                           <div class="abstract"><span class="shortdesc">Before issuing the following commands, you must replace <samp class="ph codeph">x-y</samp> with
+                                 your specific CUDA version.</span></div>
+                           <ol class="ol steps">
+                              <li class="li step"><span class="ph cmd">Download the Ubuntu package: <samp class="ph codeph">cuda*ubuntu*_amd64.deb</samp></span></li>
+                              <li class="li step"><span class="ph cmd">Download the cross compile package:
+                                    <samp class="ph codeph">cuda*-cross-sbsa*_all.deb</samp></span></li>
+                              <li class="li step"><span class="ph cmd">Execute the following commands:</span><p class="p"><samp class="ph codeph">sudo dpkg -i cuda*ubuntu*_amd64.deb</samp></p>
+                                 <p class="p"><samp class="ph codeph">sudo dpkg -i cuda-repo-cross-sbsa*_all.deb</samp></p>
+                                 <p class="p"><samp class="ph codeph">sudo apt-get update</samp></p>
+                                 <p class="p"><samp class="ph codeph">sudo apt-get install cuda-toolkit-x-y -y</samp></p>
+                                 <p class="p"><samp class="ph codeph">sudo apt-get install cuda-cross-sbsa* -y</samp></p>
+                              </li>
+                           </ol>
+                        </div>
+                     </div>
+                     <div class="topic task nested2" id="cross-compiling-install-cudnn-sbsa"><a name="cross-compiling-install-cudnn-sbsa" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cross-compiling-install-cudnn-sbsa" name="cross-compiling-install-cudnn-sbsa" shape="rect">4.1.2.&nbsp;Installing cuDNN for Linux AArch64 SBSA</a></h3>
+                        <div class="body taskbody">
+                           <div class="abstract"><span class="shortdesc"></span></div>
+                           <ol class="ol steps">
+                              <li class="li step"><span class="ph cmd">Download the cuDNN Ubuntu package for your preferred CUDA toolkit
+                                    version.</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">cudnn-local-repo-*_amd64.deb</kbd></pre></li>
+                              <li class="li step"><span class="ph cmd">Download the cross compile package.</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">cudnn-local-repo-cross-sbsa-*_all.deb</kbd></pre></li>
+                              <li class="li step"><span class="ph cmd">Execute the following commands:</span><div class="p"><pre class="pre screen" xml:space="preserve">sudo dpkg -i cudnn-local-repo-*_amd64.deb
+
+sudo apt-get update
+
+sudo apt-get install libcudnn8 libcudnn8-dev libcudnn-samples -y
+
+sudo dpkg -i cudnn-local-repo-cross-sbsa-*_all.deb
+
+sudo apt-get update
+
+sudo apt-get install libcudnn8-cross-sbsa -y
+</pre></div>
+                              </li>
+                              <li class="li step"><span class="ph cmd">Install AArch64 host compiler. </span><pre class="pre screen" xml:space="preserve">sudo apt install g++-aarch64-linux-gnu</pre></li>
+                           </ol>
+                        </div>
+                     </div>
+                     <div class="topic task nested2" id="cross-compile-cudnn-samples-sbsa"><a name="cross-compile-cudnn-samples-sbsa" shape="rect">
+                           <!-- --></a><h3 class="title topictitle2"><a href="#cross-compile-cudnn-samples-sbsa" name="cross-compile-cudnn-samples-sbsa" shape="rect">4.1.3.&nbsp;Cross-Compiling cuDNN Samples for Linux AArch64 SBSA</a></h3>
+                        <div class="body taskbody">
+                           <div class="abstract"><span class="shortdesc"></span></div>
+                           <ol class="ol steps">
+                              <li class="li step"><span class="ph cmd">Copy the <samp class="ph codeph">cudnn_samples_v8</samp> directory to your home
+                                    directory:</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">$ cp -r /usr/src/cudnn_samples_v8 $HOME</kbd></pre></li>
+                              <li class="li step"><span class="ph cmd">For each sample, execute the following commands:</span><pre class="pre screen" xml:space="preserve"><kbd class="ph userinput">$ cd $HOME/cudnn_samples_v8/(each sample)
+$ sudo make TARGET_ARCH=aarch64 SBSA=1
+</kbd></pre></li>
+                           </ol>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="acknowledgements"><a name="acknowledgements" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#acknowledgements" name="acknowledgements" shape="rect">5.1.&nbsp;Appendix</a></h2>
+                  <div class="body conbody">
+                     <div class="abstract"><span class="shortdesc"></span></div>
+                     <p class="p"></p>
+                  </div>
+                  <div class="topic concept nested1" id="unique_1729744975"><a name="unique_1729744975" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#unique_1729744975" name="unique_1729744975" shape="rect">ACKNOWLEDGEMENTS</a></h3>
+                     <div class="body conbody">
+                        <div class="abstract"><span class="shortdesc">NVIDIA would like to thank the following individuals and institutions for their
+                              contributions:</span></div>
+                        <div class="p"><a name="unique_1729744975__ul_kfq_zcs_j4b" shape="rect">
+                              <!-- --></a><ul class="ul" id="unique_1729744975__ul_kfq_zcs_j4b">
+                              <li class="li">This product includes zlib - a general purpose compression library <a class="xref" href="https://zlib.net/" target="_blank" shape="rect">https://zlib.net/</a> Copyright © 1995-2017 Jean-loup Gailly and Mark
+                                 Adler
+                              </li>
+                              <li class="li">This product includes zstr - a C++ zlib wrapper <a class="xref" href="https://github.com/mateidavid/zstr" target="_blank" shape="rect">https://github.com/mateidavid/zstr</a> Copyright © 2015 Matei David,
+                                 Ontario Institute for Cancer Research
+                              </li>
+                              <li class="li">This product includes RapidJSON - A fast JSON parser/generator for C++ with both
+                                 SAX/DOM style API <a class="xref" href="https://github.com/Tencent/rapidjson" target="_blank" shape="rect">https://github.com/Tencent/rapidjson</a>
+                                 Copyright © 2015 THL A29 Limited, a Tencent company, and Milo Yip.
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="topic concept nested0" id="notices-header"><a name="notices-header" shape="rect">
+                     <!-- --></a><h2 class="title topictitle1"><a href="#notices-header" name="notices-header" shape="rect">Notices</a></h2>
+                  <div class="topic reference nested1" id="notice"><a name="notice" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#notice" name="notice" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices" id="notice__section_kbg_pmm_flb"><a name="notice__section_kbg_pmm_flb" shape="rect">
+                              <!-- --></a><h3 class="title sectiontitle notices">Notice</h3>
+                           <p class="p" id="notice__notice-para-1"><a name="notice__notice-para-1" shape="rect">
+                                 <!-- --></a>This document is provided for information purposes
+                              only and shall not be regarded as a warranty of a certain
+                              functionality, condition, or quality of a product. NVIDIA
+                              Corporation (“NVIDIA”) makes no representations or warranties,
+                              expressed or implied, as to the accuracy or completeness of the
+                              information contained in this document and assumes no responsibility
+                              for any errors contained herein. NVIDIA shall have no liability for
+                              the consequences or use of such information or for any infringement
+                              of patents or other rights of third parties that may result from its
+                              use. This document is not a commitment to develop, release, or
+                              deliver any Material (defined below), code, or functionality.
+                           </p>
+                           <p class="p" id="notice__notice-para-2"><a name="notice__notice-para-2" shape="rect">
+                                 <!-- --></a>NVIDIA reserves the right to make corrections,
+                              modifications, enhancements, improvements, and any other changes to
+                              this document, at any time without notice.
+                           </p>
+                           <p class="p" id="notice__notice-para-3"><a name="notice__notice-para-3" shape="rect">
+                                 <!-- --></a>Customer should obtain the latest relevant information
+                              before placing orders and should verify that such information is
+                              current and complete.
+                           </p>
+                           <p class="p" id="notice__notice-para-4"><a name="notice__notice-para-4" shape="rect">
+                                 <!-- --></a>NVIDIA products are sold subject to the NVIDIA
+                              standard terms and conditions of sale supplied at the time of order
+                              acknowledgement, unless otherwise agreed in an individual sales
+                              agreement signed by authorized representatives of NVIDIA and
+                              customer (“Terms of Sale”). NVIDIA hereby expressly objects to
+                              applying any customer general terms and conditions with regards to
+                              the purchase of the NVIDIA product referenced in this document. No
+                              contractual obligations are formed either directly or indirectly by
+                              this document.
+                           </p>
+                           <p class="p" id="notice__notice-para-5"><a name="notice__notice-para-5" shape="rect">
+                                 <!-- --></a>NVIDIA products are not designed, authorized, or
+                              warranted to be suitable for use in medical, military, aircraft,
+                              space, or life support equipment, nor in applications where failure
+                              or malfunction of the NVIDIA product can reasonably be expected to
+                              result in personal injury, death, or property or environmental
+                              damage. NVIDIA accepts no liability for inclusion and/or use of
+                              NVIDIA products in such equipment or applications and therefore such
+                              inclusion and/or use is at customer’s own risk.
+                           </p>
+                           <p class="p" id="notice__notice-para-6"><a name="notice__notice-para-6" shape="rect">
+                                 <!-- --></a>NVIDIA makes no representation or warranty that
+                              products based on this document will be suitable for any specified
+                              use. Testing of all parameters of each product is not necessarily
+                              performed by NVIDIA. It is customer’s sole responsibility to
+                              evaluate and determine the applicability of any information
+                              contained in this document, ensure the product is suitable and fit
+                              for the application planned by customer, and perform the necessary
+                              testing for the application in order to avoid a default of the
+                              application or the product. Weaknesses in customer’s product designs
+                              may affect the quality and reliability of the NVIDIA product and may
+                              result in additional or different conditions and/or requirements
+                              beyond those contained in this document. NVIDIA accepts no liability
+                              related to any default, damage, costs, or problem which may be based
+                              on or attributable to: (i) the use of the NVIDIA product in any
+                              manner that is contrary to this document or (ii) customer product
+                              designs.
+                           </p>
+                           <p class="p" id="notice__notice-para-7"><a name="notice__notice-para-7" shape="rect">
+                                 <!-- --></a>No license, either expressed or implied, is granted
+                              under any NVIDIA patent right, copyright, or other NVIDIA
+                              intellectual property right under this document. Information
+                              published by NVIDIA regarding third-party products or services does
+                              not constitute a license from NVIDIA to use such products or
+                              services or a warranty or endorsement thereof. Use of such
+                              information may require a license from a third party under the
+                              patents or other intellectual property rights of the third party, or
+                              a license from NVIDIA under the patents or other intellectual
+                              property rights of NVIDIA.
+                           </p>
+                           <p class="p" id="notice__notice-para-8"><a name="notice__notice-para-8" shape="rect">
+                                 <!-- --></a>Reproduction of information in this document is
+                              permissible only if approved in advance by NVIDIA in writing,
+                              reproduced without alteration and in full compliance with all
+                              applicable export laws and regulations, and accompanied by all
+                              associated conditions, limitations, and notices.
+                           </p>
+                           <p class="p" id="notice__notice-para-9"><a name="notice__notice-para-9" shape="rect">
+                                 <!-- --></a>THIS DOCUMENT AND ALL NVIDIA DESIGN SPECIFICATIONS,
+                              REFERENCE BOARDS, FILES, DRAWINGS, DIAGNOSTICS, LISTS, AND OTHER
+                              DOCUMENTS (TOGETHER AND SEPARATELY, “MATERIALS”) ARE BEING PROVIDED
+                              “AS IS.” NVIDIA MAKES NO WARRANTIES, EXPRESSED, IMPLIED, STATUTORY,
+                              OR OTHERWISE WITH RESPECT TO THE MATERIALS, AND EXPRESSLY DISCLAIMS
+                              ALL IMPLIED WARRANTIES OF NONINFRINGEMENT, MERCHANTABILITY, AND
+                              FITNESS FOR A PARTICULAR PURPOSE. TO THE EXTENT NOT PROHIBITED BY
+                              LAW, IN NO EVENT WILL NVIDIA BE LIABLE FOR ANY DAMAGES, INCLUDING
+                              WITHOUT LIMITATION ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL,
+                              PUNITIVE, OR CONSEQUENTIAL DAMAGES, HOWEVER CAUSED AND REGARDLESS OF
+                              THE THEORY OF LIABILITY, ARISING OUT OF ANY USE OF THIS DOCUMENT,
+                              EVEN IF NVIDIA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+                              Notwithstanding any damages that customer might incur for any reason
+                              whatsoever, NVIDIA’s aggregate and cumulative liability towards
+                              customer for the products described herein shall be limited in
+                              accordance with the Terms of Sale for the product.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="arm"><a name="arm" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#arm" name="arm" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices" id="arm__section_n3n_kf2_qtb"><a name="arm__section_n3n_kf2_qtb" shape="rect">
+                              <!-- --></a><h3 class="title sectiontitle notices">Arm</h3>
+                           <p class="p">Arm, AMBA and Arm Powered are registered trademarks of Arm Limited. Cortex, MPCore
+                              and Mali are trademarks of Arm Limited. "Arm" is used to represent Arm Holdings plc;
+                              its operating company Arm Limited; and the regional subsidiaries Arm Inc.; Arm KK;
+                              Arm Korea Limited.; Arm Taiwan Limited; Arm France SAS; Arm Consulting (Shanghai)
+                              Co. Ltd.; Arm Germany GmbH; Arm Embedded Technologies Pvt. Ltd.; Arm Norway, AS and
+                              Arm Sweden AB.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="hdmi"><a name="hdmi" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#hdmi" name="hdmi" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">HDMI</h3>
+                           <p class="p">HDMI, the HDMI logo, and High-Definition Multimedia Interface are trademarks or
+                              registered trademarks of HDMI Licensing LLC.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="blackberry"><a name="blackberry" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#blackberry" name="blackberry" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">Blackberry/QNX</h3>
+                           <p class="p">Copyright © 2020 BlackBerry Limited. All rights reserved.</p>
+                           <p class="p">Trademarks, including but not limited to BLACKBERRY, EMBLEM Design, QNX, AVIAGE,
+                              MOMENTICS, NEUTRINO and QNX CAR are the trademarks or registered trademarks of
+                              BlackBerry Limited, used under license, and the exclusive rights to such trademarks
+                              are expressly reserved. 
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="google"><a name="google" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#google" name="google" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">Google</h3>
+                           <p class="p">Android, Android TV, Google Play and the Google Play logo are trademarks of Google,
+                              Inc.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="trademarks"><a name="trademarks" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#trademarks" name="trademarks" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">Trademarks</h3>
+                           <p class="p">NVIDIA, the NVIDIA logo, and BlueField, CUDA, DALI, DRIVE, Hopper, JetPack, Jetson
+                              AGX Xavier, Jetson Nano, Maxwell, NGC, Nsight, Orin, Pascal, Quadro, Tegra,
+                              TensorRT, Triton, Turing and Volta are trademarks and/or registered trademarks of
+                              NVIDIA Corporation in the United States and other countries. Other company and
+                              product names may be trademarks of the respective companies with which they are
+                              associated.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="topic reference nested1" id="copyright-past-to-present"><a name="copyright-past-to-present" shape="rect">
+                        <!-- --></a><h3 class="title topictitle2"><a href="#copyright-past-to-present" name="copyright-past-to-present" shape="rect"></a></h3>
+                     <div class="body refbody">
+                        <div class="section notices">
+                           <h3 class="title sectiontitle notices">Copyright</h3>
+                           <p class="p">© <span class="ph">2014</span>-<span class="ph">2024</span> NVIDIA Corporation &amp;
+                              affiliates. All rights reserved.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               
+               
+            </article>
+            <footer id="footer"><img src="../common/formatting/NVIDIA-LogoBlack.svg"></img><div><a href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/" target="_blank">Privacy Policy</a> |
+                  <a href="https://www.nvidia.com/en-us/privacy-center/" target="_blank">Manage My Privacy</a> |
+                  <a href="https://www.nvidia.com/en-us/preferences/email-preferences/" target="_blank">Do Not Sell or Share My Data</a> |
+                  <a href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/" target="_blank">Terms of Service</a> |
+                  <a href="https://www.nvidia.com/en-us/about-nvidia/accessibility/" target="_blank">Accessibility</a> |
+                  <a href="https://www.nvidia.com/en-us/about-nvidia/company-policies/" target="_blank">Corporate Policies</a> |
+                  <a href="https://www.nvidia.com/en-us/product-security/" target="_blank">Product Security</a> |
+                  <a href="https://www.nvidia.com/en-us/contact/" target="_blank">Contact</a></div>
+               <div class="copyright">Copyright © 2024 NVIDIA Corporation</div>
+            </footer>
+         </div>
+      </div>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/formatting/common.min.js"></script>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/scripts/google-analytics/google-analytics-write.js"></script>
+      <script language="JavaScript" type="text/javascript" charset="utf-8" src="../common/scripts/google-analytics/google-analytics-tracker.js"></script>
+      <script type="text/javascript">var switchTo5x=true;</script><script type="text/javascript">stLight.options({publisher: "998dc202-a267-4d8e-bce9-14debadb8d92", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+      <script type="text/javascript">_satellite.pageBottom();</script></body>
+
+<!-- Mirrored from docs.nvidia.com/deeplearning/cudnn/archives/cudnn-897/install-guide/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Aug 2024 07:09:01 GMT -->
+</html>
